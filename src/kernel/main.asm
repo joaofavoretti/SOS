@@ -8,9 +8,11 @@ start:
     jmp main
 
 
+;
 ; Prints a string to the screen.
 ; Params:
 ;   - ds:si = pointer to string
+;
 puts:
     push si
     push ax
