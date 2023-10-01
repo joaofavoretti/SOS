@@ -3,10 +3,8 @@ ASM=nasm
 SRC_DIR=src
 BUILD_DIR=build
 
-EMULATOR=qemu-system-i386
-
 # Phony targets
-.PHONY: all floppy_img kernel bootloader clean always run
+.PHONY: all floppy_img kernel bootloader clean always
 
 #
 # Floppy Image
@@ -47,8 +45,3 @@ always:
 clean:
 	rm -rf $(BUILD_DIR)/*
 
-#
-# Run
-#
-run: floppy_image
-	$(EMULATOR) -fda $(BUILD_DIR)/main_floppy.img
