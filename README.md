@@ -1,4 +1,6 @@
-# simple-operating-system
+# SOS: Simple Operating System
+
+Very very simple 16-bit x86 operating system that I am trying to create to learn how to intall Linux on my computer xD
 
 Required packets:
 
