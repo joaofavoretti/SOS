@@ -9,7 +9,6 @@ Tested on Ubuntu
 ```
 make nasm qemu
 mtools
-bochs bochs-sdl bochsbios vgabios
 ```
 
 ## Disk addressing information

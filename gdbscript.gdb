@@ -1,7 +1,7 @@
 set disassembly-flavor intel
 set architecture i8086
 
-target remote | qemu-system-i386 -S -gdb stdio -fda build/floppy.img
+target remote | qemu-system-i386 -S -gdb stdio -fda build/disk.img
 
 break *0x7C00
 
