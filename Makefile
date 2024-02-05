@@ -1,13 +1,14 @@
 
-.PHONY: run debug image boot kernel always clean disas
+.PHONY: run debug image boot kernel always clean disas tools_fat
 
 ###### BUILDING
 ASM=nasm
+CC=gcc
 BUILD_DIR=build
+TOOLS_DIR=tools
 SRC_DIR=src
 
-
-all: always image
+all: always image tools_fat
 
 #
 # Image
@@ -19,6 +20,7 @@ $(BUILD_DIR)/disk.img: boot kernel
 	mkfs.fat -F 12 -n "SOS" $(BUILD_DIR)/disk.img
 	dd if=$(BUILD_DIR)/boot.bin of=$(BUILD_DIR)/disk.img conv=notrunc
 	mcopy -i $(BUILD_DIR)/disk.img $(BUILD_DIR)/kernel.bin "::kernel.bin"
+	mcopy -i $(BUILD_DIR)/disk.img test.txt "::test.txt"
 
 
 #
@@ -38,6 +40,13 @@ kernel: $(BUILD_DIR)/kernel.bin always
 $(BUILD_DIR)/kernel.bin: always
 	$(ASM) -f bin -o $(BUILD_DIR)/kernel.bin $(SRC_DIR)/kernel/kernel.asm
 
+#
+# Tool
+#
+tools_fat: $(BUILD_DIR)/tools/fat
+$(BUILD_DIR)/tools/fat: always
+	mkdir -p $(BUILD_DIR)/tools
+	$(CC) -g -o $(BUILD_DIR)/tools/fat $(TOOLS_DIR)/fat/fat.c
 
 #
 # Always
